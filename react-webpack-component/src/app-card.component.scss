@@ -1,0 +1,27 @@
+@mixin scale($size) {
+    transform: scale($size);
+    transform-origin: center;
+}
+.card{
+    display: block;
+    border-radius: 16px;
+    margin: 16px;
+    padding: 16px;
+    box-shadow: 0 7px 14px rgb(0 0 0 / 25%);
+    transition: all 0.2s ease-in-out;
+}
+.injected{
+    margin: 1rem 0px;
+    padding: 1rem;
+    border: 4px dashed #e5e7eb;
+}
+
+.card:hover{
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.card.activable.active {
+    @include scale(0.95);
+}
+.card.activable:active {
+    @include scale(0.95);
+}
