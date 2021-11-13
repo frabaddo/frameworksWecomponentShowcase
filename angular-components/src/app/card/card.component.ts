@@ -1,6 +1,8 @@
 import { Component, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable, Subject, timer } from 'rxjs';
 import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { decrement, increment } from '../app.module';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -36,12 +38,26 @@ export class CardComponent implements OnInit, OnDestroy {
 
   @Output("carded") carded : EventEmitter<number> = new EventEmitter<number>()
 
+  selected = this.store.select((state => (state as any).base.count))
+
+  sharedCount = 0
+
   constructor(
-    public data: DataService
+    public data: DataService,
+    private store: Store
   ) { }
 
   ngOnInit(): void {
     this.$click.subscribe();
+    document.body.addEventListener('sharedEvent', e => this.sharedCount = this.sharedCount + 1);
+  }
+  
+  sendShared() {
+      const event = new CustomEvent('sharedEvent', {
+          bubbles: true,
+          detail: { text: 'hello' }
+      });
+      document.body.dispatchEvent(event);
   }
   
   ngOnDestroy(){
@@ -51,6 +67,13 @@ export class CardComponent implements OnInit, OnDestroy {
   inc(){
     this.data.increment();
     this.carded.emit(this.data.counter)
+  }
+
+  handleDecrementClick(){
+    this.store.dispatch(decrement())
+  }
+  handleIncrementClick(){
+    this.store.dispatch(increment())
   }
 
 }

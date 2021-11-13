@@ -1,4 +1,4 @@
 import { defineComponent } from './defineComponent';
-import { AppCard } from './app-card.component';
+import CardContainer from './app-card-wrapper';
 
-defineComponent("react-app-card",AppCard,["carded"]);
+defineComponent("react-app-card",CardContainer,["carded"]);

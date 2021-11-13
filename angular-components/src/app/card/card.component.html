@@ -6,6 +6,22 @@
 
 <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" (click)="inc()">bottone in angular</button>
 
+<h1>Isolated Store</h1>
+<p>
+    {{(selected | async)}}
+</p>
+
+<button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" (click)="handleDecrementClick()">Decrement</button>
+<button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" (click)="handleIncrementClick()">Increment</button>
+
+<h1>sharedEvents</h1>
+<p>
+    {{sharedCount}}
+</p>
+<p>
+    <button class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded" (click)="sendShared()">sendShared</button>
+</p>
+
 <div class="injected border-dashed border-4 border-light-blue-500 m-4 ml-0 p-4">
     <slot></slot>
 </div>

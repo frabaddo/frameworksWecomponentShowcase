@@ -28,7 +28,6 @@ export function defineComponent(name, component, events=[]) {
         }
 
         update() {
-            console.log("update")
             this.unmount();
             this.mount();
         }
@@ -61,19 +60,6 @@ export function defineComponent(name, component, events=[]) {
         }
 
         getEvents() {
-            // return Object.values(this.attributes)
-            //     .filter((key) => /on([a-z].*)/.exec(key.name))
-            //     .reduce(
-            //         (events, ev) => ({
-            //             ...events,
-            //             [ev.name]: (args) =>{
-            //                 return this.dispatchEvent(
-            //                     new CustomEvent(ev.name.substring(2), { ...args })
-            //                 )
-            //             }
-            //         }),
-            //         {}
-            //     );
             return events.reduce(
                 (events, ev) => ({
                     ...events,
